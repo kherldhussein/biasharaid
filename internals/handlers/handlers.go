@@ -11,30 +11,49 @@ import (
 var data renders.FormData
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplate(w, "home.page.html", nil)
+	data := renders.FormData{
+		Title: "Welcome to BiasharaID - Your Secure Blockchain Identity Verification",
+	}
+	renders.RenderTemplate(w, "home.page.html", &data)
 }
 
 func Verification(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplate(w, "verify.page.html", nil)
+	data := renders.FormData{
+		Title: "Verification - BiasharaID",
+	}
+	renders.RenderTemplate(w, "verify.page.html", &data)
 }
 
 func Contact(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplate(w, "contact.page.html", nil)
+	data := renders.FormData{
+		Title: "Contact Us - BiasharaID",
+	}
+	renders.RenderTemplate(w, "contact.page.html", &data)
 }
 
 func Details(w http.ResponseWriter, r *http.Request) {
-
+	// Add your implementation and title here
+	data := renders.FormData{
+		Title: "Details - BiasharaID",
+	}
+	renders.RenderTemplate(w, "details.page.html", &data)
 }
 
 func DummyHandler(w http.ResponseWriter, r *http.Request) {
-	resp := blockchain.BlockchainInstance.Blocks
-	renders.RenderTemplate(w, "dummy.page.html", resp)
+	// resp := blockchain.BlockchainInstance.Blocks
+	data := renders.FormData{
+		Title: "Dummy Data - BiasharaID",
+	}
+	renders.RenderTemplate(w, "dummy.page.html", &data)
 }
 
 func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		renders.RenderTemplate(w, "verify.page.html", nil)
+		data := renders.FormData{
+			Title: "Verify Your Identity - BiasharaID",
+		}
+		renders.RenderTemplate(w, "verify.page.html", &data)
 		return
 	case "POST":
 		if err := r.ParseForm(); err != nil {
@@ -58,10 +77,16 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if block == nil {
-			renders.RenderTemplate(w, "not_found.page.html", nil)
+			data := renders.FormData{
+				Title: "Not Found - BiasharaID",
+			}
+			renders.RenderTemplate(w, "not_found.page.html", &data)
 			return
 		}
 
+		// data := renders.FormData{
+		// 	Title: "Verification Result - BiasharaID",
+		// }
 		renders.RenderTemplate(w, "verify.page.html", block)
 	default:
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -69,7 +94,10 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Add(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplate(w, "add.page.html", nil)
+	data := renders.FormData{
+		Title: "Add Entrepreneur - BiasharaID",
+	}
+	renders.RenderTemplate(w, "add.page.html", &data)
 }
 
 func Addpage(w http.ResponseWriter, r *http.Request) {
@@ -86,21 +114,33 @@ func Addpage(w http.ResponseWriter, r *http.Request) {
 
 	blockchain.BlockchainInstance.AddBlock(entrepreneur)
 	w.WriteHeader(http.StatusOK)
-	data.Body = "Data Added succesfull"
-
-	renders.RenderTemplate(w, "add.page.html", data)
+	data := renders.FormData{
+		Body:  "Data Added Successfully",
+		Title: "Add Entrepreneur - BiasharaID",
+	}
+	renders.RenderTemplate(w, "add.page.html", &data)
 }
+
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	renders.RenderTemplate(w, "404.page.html", nil)
+	data := renders.FormData{
+		Title: "Page Not Found - BiasharaID",
+	}
+	renders.RenderTemplate(w, "404.page.html", &data)
 }
 
 func BadRequestHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusBadRequest)
-	renders.RenderTemplate(w, "400.page.html", nil)
+	data := renders.FormData{
+		Title: "Bad Request - BiasharaID",
+	}
+	renders.RenderTemplate(w, "400.page.html", &data)
 }
 
 func ServerErrorHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
-	renders.RenderTemplate(w, "500.page.html", nil)
+	data := renders.FormData{
+		Title: "Server Error - BiasharaID",
+	}
+	renders.RenderTemplate(w, "500.page.html", &data)
 }
