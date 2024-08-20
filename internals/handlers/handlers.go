@@ -77,10 +77,7 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if block == nil {
-			data := renders.FormData{
-				Title: "Not Found - BiasharaID",
-			}
-			renders.RenderTemplate(w, "not_found.page.html", &data)
+			renders.RenderTemplate(w, "not_found.page.html", nil)
 			return
 		}
 
@@ -94,10 +91,7 @@ func VerifyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Add(w http.ResponseWriter, r *http.Request) {
-	data := renders.FormData{
-		Title: "Add Entrepreneur - BiasharaID",
-	}
-	renders.RenderTemplate(w, "add.page.html", &data)
+	renders.RenderTemplate(w, "add.page.html", nil)
 }
 
 func Addpage(w http.ResponseWriter, r *http.Request) {
@@ -114,11 +108,9 @@ func Addpage(w http.ResponseWriter, r *http.Request) {
 
 	blockchain.BlockchainInstance.AddBlock(entrepreneur)
 	w.WriteHeader(http.StatusOK)
-	data := renders.FormData{
-		Body:  "Data Added Successfully",
-		Title: "Add Entrepreneur - BiasharaID",
-	}
-	renders.RenderTemplate(w, "add.page.html", &data)
+	data.Body = "Data Added succesfull"
+
+	renders.RenderTemplate(w, "add.page.html", data)
 }
 
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
