@@ -1,10 +1,10 @@
 {{define "base"}}
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started with BiasharaID - Secure Blockchain Identity Verification</title>
+    <title>{{.Title}}</title>
     <link rel="stylesheet" href="../static/index.css">
     {{block "css" .}}{{end}}
 </head>
@@ -43,8 +43,7 @@
             <p>&copy; 2023 BiasharaID. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://twitter.com/biasharaid" target="_blank" rel="noopener noreferrer">Twitter</a>
-                <a href="https://www.linkedin.com/company/biasharaid" target="_blank"
-                    rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://www.linkedin.com/company/biasharaid" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://www.facebook.com/biasharaid" target="_blank" rel="noopener noreferrer">Facebook</a>
             </div>
             <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
@@ -68,5 +67,4 @@
         });
     </script>
 </body>
-
 {{end}}
